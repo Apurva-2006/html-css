@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<head>
+    <title>Track Order-Ethnic Elegance</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+       body {
+            font-family: Arial, sans-serif;
+            padding: 10px;
+            text-align: center;
+            justify-content:center;
+            align-items:center;
+        }
+        input{
+            border-radius: 5px;
+            padding: 10px;
+            margin:10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+        }
+        input:invalid{
+            border:1px solid red;
+        }
+        input:focus{
+        border-color: #5c6bc0;;
+      outline: none;
+      background-color: #f0f5ff;
+        }
+        input[type="submit"]{
+            background-color:blue;
+            color:white;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<h1>Track Your Order</h1>
+<h2>
+Enter your order ID and registered email to check the delivery status of your order.
+</h2>
+<form>
+    <label for="orderid">Order ID:</label>
+    <input type="text"required><br><br>
+    <label for="email">Email:</label>
+    <input type="email"required><br><br>
+    <input type="submit" value="Track Now">
+</form>
+</body>
+</html>
