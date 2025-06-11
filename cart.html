@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Cart - Ethnic Elegance</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    .cart-item img {
+      width: 100px;
+      height: auto;
+      margin-right: 15px;
+    }
+    .cart-item h3 {
+      margin: 0;
+    }
+    .cart-item {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.cart-item button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.cart-item button:hover {
+  background-color: #cc0000;
+}
+
+#totalPrice{
+    font-size: 18px; 
+    font-weight: bold; 
+    text-align: right; 
+    margin: 10px 20px;
+    color:green;
+}
+
+
+  </style>
+</head>
+<body>
+  <h1 align="center">Your Cart 🛒</h1>
+  <div id="totalPrice"></div>
+  <div id="cartItems"></div>
+  <script>
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartContainer = document.getElementById('cartItems');
+    const totalPriceContainer = document.getElementById('totalPrice');
+  
+    function renderCart() {
+      cartContainer.innerHTML = '';
+      let total = 0;
+  
+      if (cart.length === 0) {
+        cartContainer.innerHTML = '<h2 align="center">You have not added anything to your cart yet.<br>Start browsing our beautiful collection and add your favorite pieces!</h2>';
+        totalPriceContainer.innerText = '';
+        return;
+      }
+  
+      cart.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        const numericPrice = parseFloat(item.price.replace(/[^\d.]/g, '')) || 0;
+        total += numericPrice;
+  
+        div.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" width="120">
+          <div>
+            <h3>${item.name}</h3>
+            <p>${item.price}</p>
+            <button onclick="removeFromCart(${index})">Remove from Cart</button>
+          </div>
+        `;
+        cartContainer.appendChild(div);
+      });
+  
+      totalPriceContainer.innerText = `Total Price: ₹${total.toFixed(2)}`;
+    }
+  
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+    }
+  
+    renderCart();
+  </script>
+  
+</body>
+</html>
